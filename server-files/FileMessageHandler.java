@@ -20,20 +20,12 @@ public class FileMessageHandler implements Runnable {
         dir = new File("files");
         serverDir = new File("server-files");
         String[] files = dir.list();
-        String[] serverFiles = serverDir.list();
         os.writeUTF("#list#");
         os.writeLong(files.length);
         for (String file : files) {
             os.writeUTF(file);
         }
-        os.writeUTF("#server-list#");
-        os.writeLong(serverFiles.length);
-        for (String file : serverFiles) {
-            os.writeUTF(file);
-        }
     }
-
-
 
     @Override
     public void run() {
