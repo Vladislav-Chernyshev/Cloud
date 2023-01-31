@@ -2,7 +2,6 @@ package com.cloud.controllers;
 
 
 import com.cloud.network.Net;
-import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -15,10 +14,11 @@ public class MainController implements Initializable {
 
     private Net net;
 
-    public ListView<String> view;
+    public ListView<String> clientView;
+    public ListView<String> serverView;
     public TextField input;
 
-    private void readListFiles() {
+    private void readListFiles(ListView <String> view) {
         try {
             view.getItems().clear();
             Long filesCount = net.readLong();
@@ -36,7 +36,9 @@ public class MainController implements Initializable {
             while (true) {
                 String command = net.readUtf();
                 if (command.equals("#list#")) {
-                    readListFiles();
+                    readListFiles(clientView);
+                }else if (command.equals("#server-list#")){
+                    readListFiles(serverView);
                 }
             }
         } catch (IOException e) {
