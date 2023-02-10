@@ -1,2 +1,5 @@
 .idea
+cloud-client/target
+cloud-core/target
+cloud-server/target
 Cloud.iml
